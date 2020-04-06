@@ -7,5 +7,5 @@ class PetalHomeView(View):
 
     def get(self, request, *args, **kwargs):
         template = loader.get_template('petal_main/index.html')
-        context = dict(title = 'Home')
+        context = dict(title = 'PeTaL')
         return HttpResponse(template.render(context, request))
