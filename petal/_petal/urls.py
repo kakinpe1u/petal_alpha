@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# noinspection PyInterpreter
 urlpatterns = [
 
     # Admin
@@ -25,7 +26,7 @@ urlpatterns = [
     path('', include('home.urls')),
 
     # Petal
-    # path('bird/',        include('bird.urls')),
+    path('bird/',        include('bird.urls')),
     # path('bird-legacy/', include('bird-legacy.urls')),
     # path('biomole/',     include('biomole.urls')),
     # path('map/',         include('map-beta.urls')),

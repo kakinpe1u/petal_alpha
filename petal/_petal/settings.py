@@ -28,7 +28,7 @@ SECRET_KEY = 'wtfbk4yoq5lj2%d_-f#l=6msc8)1+&(de2b!5)1d_a@n8$=+8l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['139.88.179.199', '0.0.0.0', '127.0.0.1']
 
 
 # Application definition
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_api_key',
     'django_neomodel',
 
     # Misc
