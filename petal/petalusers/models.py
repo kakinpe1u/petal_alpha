@@ -10,14 +10,17 @@ from neomodel import (StructuredNode, StringProperty, IntegerProperty,
                       StructuredRel, BooleanProperty,
                       DoesNotExist)
 
-from ..api.models import PetalObject, RelationshipWeight
-from ..bird.models import Searchable, Impression
+from api.models import PetalObject, RelationshipWeight
+from bird.models import Searchable, Impression
+
+def get_current_time():
+    return datetime.now(pytz.utc)
 
 class SearchCount(StructuredRel):
     times_searched = IntegerProperty(default = 1)
     last_searched = DateTimeProperty(default = lambda: datetime.now(pytz.utc))
 
-class User(Searchable):
+class PetalUser(Searchable):
     sex = StringProperty()
     # oauth_token = StringProperty()
     username = StringProperty(unique_index = True)

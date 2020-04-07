@@ -46,12 +46,12 @@ class PetalObject(StructuredNode):
 # class VotableContent(NotificationCapable):
 class Content:
     content = StringProperty()
-    owned_by = RelationshipTo('users.models.User', 'OWNED_BY', model = SharedOnRel)
+    owned_by = RelationshipTo('petalusers.models.PetalUser', 'OWNED_BY', model = SharedOnRel)
 
 class PetalContent(Content):
 
-    rel_weight = RelationshipTo('users.models.User', 'HAS_WEIGHT',
-                                model = RelationshipWeight)
+    relationship_weight = RelationshipTo('petalusers.models.PetalUser', 'HAS_WEIGHT',
+                                         model = RelationshipWeight)
 
     @classmethod
     def get_model_name(cls):

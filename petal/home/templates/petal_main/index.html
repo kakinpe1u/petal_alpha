@@ -10,6 +10,12 @@
       <div class="contentMain wow fadeInUpMin" data-wow-duration="2s">
          <h1>PeTaL</h1>
          <h2>Periodic Table of Life</h2>
+            {% if user.is_authenticated %}
+                Welcome {{ user.username }}!
+            {% else %}
+                <p>You are not logged in</p>
+            <a href="{% url 'login' %}">Log In</a>
+            {% endif %}
          <a href="/graph-3d" class="button startExploringBtn">Start Exploring</a>
       </div>
    </div>

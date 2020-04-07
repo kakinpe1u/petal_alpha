@@ -22,6 +22,9 @@ urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
 
+    # User management
+    path('accounts/', include('django.contrib.auth.urls')),
+
     # Home Page
     path('', include('home.urls')),
 
