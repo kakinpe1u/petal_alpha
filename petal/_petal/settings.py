@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from os import environ, path, makedirs
 
 # Connect to Neo4j Database
 from neomodel import config
@@ -101,6 +102,9 @@ TEMPLATES = [
         },
     },
 ]
+
+WEB_ADDRESS = "https://petal.local"
+
 
 WSGI_APPLICATION = '_petal.wsgi.application'
 

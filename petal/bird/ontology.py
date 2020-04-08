@@ -1,16 +1,9 @@
-from neomodel import (StructuredNode, StringProperty,
+from django.core.cache import cache
+from django.utils.text import slugify
+
+from neomodel import (StructuredNode, StringProperty, db, DoesNotExist,
                       RelationshipTo, RelationshipFrom, Relationship)
-
-class Entity(StructuredNode):
-    name                     = StringProperty()
-    sourceID                 = StringProperty()
-    status                   = StringProperty()
-    node_id                  = StringProperty(index = True)
-
-    # Relationships
-    articles                 = RelationshipFrom('.article.Article', 'ARTICLE_OF')
-    species           = RelationshipFrom('.species.Species', 'SPECIES_OF')
-    entities                 = Relationship('.entity.Entity', None)
+from neo4j import CypherError
 
 class Article(StructuredNode):
     __abstract_node__ = True
@@ -26,8 +19,27 @@ class Article(StructuredNode):
     # node_id = StringProperty(index = True)
 
     # Relationships
-    article = Relationship(".article.Article", None)
-    species = RelationshipTo(".species.Species", "MENTIONS_IN_ARTICLE")
+    article_relationship = Relationship(".article.Article", None)
+    species_relationship = RelationshipTo(".species.Species", "MENTIONED_IN_ARTICLE")
+
+    @classmethod
+    def get(cls, object_uuid):
+        article = cache.get(object_uuid)
+        if article is None:
+            response, _ = db.cypher_query(
+                "MATCH (a:%s {object_uuid:'%s'}) RETURN a" % (
+                    cls.__name__, object_uuid))
+            try:
+                try:
+                    response[0][0].pull()
+                except(CypherError, Exception):
+                    pass
+                article = cls.inflate(response[0][0])
+            except IndexError:
+                raise DoesNotExist('Article with id: %s '
+                                   'does not exist' % object_uuid)
+            cache.set(object_uuid, article)
+        return article
 
 class WikipediaArticle(Article):
     __label__ = "WikipediaArticle"
@@ -41,8 +53,28 @@ class Species(StructuredNode):
     Family = StringProperty()
     Class = StringProperty()
     Name = StringProperty(required = True)
-    node_id = StringProperty(index = True)
+    uuid = StringProperty()
+    # node_id = StringProperty(index = True)
 
     # Relationships (edges
-    species = Relationship(".species.Species", None)
-    articles = RelationshipTo(".article.Article", "MENTIONS_SPECIES")
+    species_relationship = Relationship(".species.Species", None)
+    article_relationship = RelationshipTo(".article.Article", "MENTIONS_SPECIES")
+
+    @classmethod
+    def get(cls, object_uuid):
+        species = cache.get(object_uuid)
+        if species is None:
+            response, _ = db.cypher_query(
+                "MATCH (a:%s {object_uuid:'%s'}) RETURN a" % (
+                    cls.__name__, object_uuid))
+            try:
+                try:
+                    response[0][0].pull()
+                except(CypherError, Exception):
+                    pass
+                species = cls.inflate(response[0][0])
+            except IndexError:
+                raise DoesNotExist('Species with id: %s '
+                                   'does not exist' % object_uuid)
+            cache.set(object_uuid, species)
+        return species

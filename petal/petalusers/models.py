@@ -8,7 +8,7 @@ from django.templatetags.static import static
 from neomodel import (StructuredNode, StringProperty, IntegerProperty,
                       DateTimeProperty, RelationshipTo,
                       StructuredRel, BooleanProperty,
-                      DoesNotExist)
+                      DoesNotExist, db)
 
 from api.models import PetalObject, RelationshipWeight
 from bird.models import Searchable, Impression
@@ -50,7 +50,7 @@ class PetalUser(Searchable):
                                      'ACCESSED_RESULT')
 
     @classmethod
-    def get(cls, username, cache_buster=False):
+    def get(cls, username, cache_buster = False):
         profile = None
         if username is None:
             return None

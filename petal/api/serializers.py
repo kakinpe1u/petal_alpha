@@ -17,7 +17,7 @@ class PetalSerializer(serializers.Serializer):
     def get_type(self, obj):
         return obj.__class__.__name__.lower()
 
-    def update(self, instance, validated_data):
+    def update(self, instance, data):
         task_param = {
             "object_uuid": instance.object_uuid,
             "label": instance.get_child_label().lower()
