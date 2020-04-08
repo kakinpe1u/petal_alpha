@@ -11,13 +11,16 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from neomodel import config
+
 # Connect to Neo4j Database
+from neomodel import config
+from neomodel import db
+
 config.DATABASE_URL = "bolt://neo4j:testing@139.88.179.199:7667"
+db.set_connection('bolt://neo4j:testing@139.88.179.199:7667')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -29,7 +32,6 @@ SECRET_KEY = 'wtfbk4yoq5lj2%d_-f#l=6msc8)1+&(de2b!5)1d_a@n8$=+8l'
 DEBUG = True
 
 ALLOWED_HOSTS = ['139.88.179.199', '0.0.0.0', '127.0.0.1']
-
 
 # Application definition
 
@@ -47,13 +49,30 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'rest_framework',
     'rest_framework_api_key',
-    'django_neomodel',
 
-    # Misc
+    # Third Party
+    'django_neomodel',
     'neomodel',
+    'allauth',
+    'allauth.account',
 ]
+
+# django-allauth config
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = 'petalhome'
+ACCOUNT_LOGOUT_REDIRECT = 'petalhome'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+# have Django output any emails to the command line console instead.
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -84,7 +103,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = '_petal.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -117,7 +135,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -130,7 +147,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

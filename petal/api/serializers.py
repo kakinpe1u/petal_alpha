@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
 from api.utils import generate_job
-from bird.jobs import update_search_object
+from bird.jobs import update_query_object
 
-class SBSerializer(serializers.Serializer):
+class PetalSerializer(serializers.Serializer):
     id = serializers.SerializerMethodField()
     type = serializers.SerializerMethodField()
     created = serializers.DateTimeField(read_only=True)
@@ -22,5 +22,5 @@ class SBSerializer(serializers.Serializer):
             "object_uuid": instance.object_uuid,
             "label": instance.get_child_label().lower()
         }
-        generate_job(job_func=update_search_object, job_param=task_param)
+        generate_job(job_func = update_query_object, job_param = task_param)
         return instance

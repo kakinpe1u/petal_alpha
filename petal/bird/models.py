@@ -14,11 +14,11 @@ class ResultRel(StructuredRel):
     date_accessed = DateTimeProperty()
 
 
-class KeyWordRel(StructuredRel):
+class KeywordRel(StructuredRel):
     relevance = FloatProperty(default=0)
 
 
-class KeyWord(StructuredNode):
+class Keyword(StructuredNode):
     keyword = StringProperty()
     weight = IntegerProperty(default=0)
 
@@ -45,7 +45,7 @@ class Query(StructuredNode):
 
     # relationships
     searched_by = Relationship('petalusers.models.PetalUser', 'SEARCHED_BY')
-    keywords = RelationshipTo(KeyWord, 'KEYWORDS', model=KeyWordRel)
+    keywords = RelationshipTo(Keyword, 'KEYWORDS', model=KeywordRel)
     results = RelationshipTo(Result, 'RESULT')
 
 
