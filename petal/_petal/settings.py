@@ -20,6 +20,8 @@ from neomodel import db
 config.DATABASE_URL = "bolt://neo4j:testing@139.88.179.199:7667"
 db.set_connection('bolt://neo4j:testing@139.88.179.199:7667')
 
+ELASTIC_SEARCH_HOST = 'localhost:9200'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

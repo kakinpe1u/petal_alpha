@@ -44,32 +44,31 @@ class PetalObject(StructuredNode):
     def get_child_label(self):
         return list(set(self.get_labels()) - set(settings.REMOVE_CLASSES))[0]
 
-# class VotableContent(NotificationCapable):
-class Entities:
-    content = StringProperty()
-    owned_by = RelationshipTo('petalusers.models.PetalUser', 'OWNED_BY', model = SharedOnRel)
+# class Entities:
+#     content = StringProperty()
+#     owned_by = RelationshipTo('petalusers.models.PetalUser', 'OWNED_BY', model = SharedOnRel)
 
-class PetalEntities(Entities):
-
-    relationship_weight = RelationshipTo('petalusers.models.PetalUser', 'HAS_WEIGHT',
-                                         model = RelationshipWeight)
-
-    @classmethod
-    def get_model_name(cls):
-        return cls.__name__
-
-    def update(self, instance):
-        pass
-
-def get_parent_entity(object_uuid):
-    try:
-        query = 'MATCH (a:Entities {object_uuid:"%s"}) RETURN a' % (
-            object_uuid)
-        response, column = db.cypher_query(query)
-        try:
-            entity = Entities.inflate(response[0][0])
-        except ValueError:
-            entity = Entities.inflate(response[0][0][0])
-        return entity
-    except(CypherError, IOError, IndexError) as exception:
-        return exception
+# class PetalEntities(Entities):
+#
+#     relationship_weight = RelationshipTo('petalusers.models.PetalUser', 'HAS_WEIGHT',
+#                                          model = RelationshipWeight)
+#
+#     @classmethod
+#     def get_model_name(cls):
+#         return cls.__name__
+#
+#     def update(self, instance):
+#         pass
+#
+# def get_parent_entity(object_uuid):
+#     try:
+#         query = 'MATCH (a:Entities {object_uuid:"%s"}) RETURN a' % (
+#             object_uuid)
+#         response, column = db.cypher_query(query)
+#         try:
+#             entity = Entities.inflate(response[0][0])
+#         except ValueError:
+#             entity = Entities.inflate(response[0][0][0])
+#         return entity
+#     except(CypherError, IOError, IndexError) as exception:
+#         return exception

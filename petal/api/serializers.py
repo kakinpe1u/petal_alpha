@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from api.utils import generate_job
-from bird.jobs import update_query_object
+from bird.tasks import update_query_object
 
 class PetalSerializer(serializers.Serializer):
     id = serializers.SerializerMethodField()
@@ -14,8 +14,8 @@ class PetalSerializer(serializers.Serializer):
         except AttributeError:
             return None
 
-    def get_type(self, obj):
-        return obj.__class__.__name__.lower()
+    def get_type(self, object):
+        return object.__class__.__name__.lower()
 
     def update(self, instance, data):
         task_param = {

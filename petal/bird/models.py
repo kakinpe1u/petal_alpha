@@ -62,7 +62,7 @@ class Searchable(PetalObject):
     def get_search_count(self):
         return self.search_count
 
-# ensure the view count doesn't get too big
+    # ensure the view count doesn't get too big
     def increment_search_count(self):
         try:
             if self.search_count >= 9223372036854775807:

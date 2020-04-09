@@ -20,3 +20,7 @@ def birdresults(request):
     articles = [article['a'] for article in result.records()]
     context = dict(papers=articles)
     return render(request, 'bird_results.html', context)
+
+
+def search_result_view(request):
+    return render(request, 'search.html')
