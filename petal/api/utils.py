@@ -1,4 +1,5 @@
 from uuid import uuid1
+from django.conf import settings
 
 def generate_job(job_func, job_param, countdown = 0, job_id = None):
     if job_id is None:

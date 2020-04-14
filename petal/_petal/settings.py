@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'rest_framework',
     'rest_framework_api_key',
+    'rest_auth',
 
     # Third Party
     'django_neomodel',
@@ -158,3 +159,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CELERY_DISABLE_RATE_LIMITS = True
+CELERY_ACCEPT_CONTENT = ['pickle', 'json']
+CELERY_ALWAYS_EAGER = False
+
+REMOVE_CLASSES = ["Searchable", "PetalObject"]
+
+SEARCH_TYPES = [
+    ("general", "general"),
+]

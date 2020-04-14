@@ -12,7 +12,7 @@ from .models import PetalUser
 from unidecode import unidecode
 import codecs
 
-from api.serializers import PetalSerializer
+from api.serializers import NodeSerializer
 from api.utils import generate_job, collect_request_data
 
 
@@ -38,14 +38,14 @@ def generate_username(first_name, last_name):
             (''.join(e for e in last_name if e.isalnum())).lower(),
             profile_count)
     try:
-        username = unidecode(codecs.encode(username, "utf-8"))
+        username = codecs.encode(username, "utf-8")
     except TypeError:
         # Handles cases where the username is already in unicode format
-        username = unidecode(username)
+        username = username
     return username
 
 
-class PetalUserSerializer(PetalSerializer):
+class PetalUserSerializer(NodeSerializer):
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     username = serializers.CharField(read_only=True)

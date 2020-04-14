@@ -22,11 +22,10 @@ class SearchViewSet(ListAPIView):
 
         if filter_type is None or filter_type == 'general':
             response = es.search(
-                index='full-search-base', size=50,
+                index='petal-search-base', size=50,
                 body={
                     "query": {
-                        "multi_match": {
-                            "fields": settings.SEARCH_FIELDS,
+                        "match": {
                             "query": query_param,
                         }
                     }
@@ -34,12 +33,11 @@ class SearchViewSet(ListAPIView):
         else:
             try:
                 response = es.search(
-                    index='full-search-base', size=50,
+                    index='petal-search-base', size=50,
                     doc_type=search_type_dict[filter_type],
                     body={
                         "query": {
-                            "multi_match": {
-                                "fields": settings.SEARCH_FIELDS,
+                            "match": {
                                 "query": query_param,
 
                             }

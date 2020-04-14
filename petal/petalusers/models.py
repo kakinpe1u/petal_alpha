@@ -22,31 +22,19 @@ class SearchCount(StructuredRel):
     times_searched = IntegerProperty(default=1)
     last_searched = DateTimeProperty(default=lambda: datetime.now(pytz.utc))
 
-# class OauthUser(PetalObject):
-#     web_address = StringProperty(default=settings.WEB_ADDRESS + '/o/token/')
-#     access_token = StringProperty()
-#     expires_in = IntegerProperty()
-#     refresh_token = StringProperty()
-#     last_modified = DateTimeProperty(default=get_current_time)
-#     token_type = StringProperty(default="Bearer")
-
-
 class PetalUser(Searchable):
     sex = StringProperty()
-    # oauth_token = StringProperty()
     username = StringProperty(unique_index=True)
     first_name = StringProperty()
     last_name = StringProperty()
     middle_name = StringProperty()
     email = StringProperty(index=True)
     date_of_birth = DateTimeProperty()
-    # profile_pic = StringProperty(default=get_default_profile_pic)
     is_admin = BooleanProperty(default=False)
     is_verified = BooleanProperty(default=True)
     search_index = StringProperty()
     employer = StringProperty()
     occupation = StringProperty()
-    # base_index_id is the plebs id in the base search index
     base_index_id = StringProperty()
     email_verified = BooleanProperty(default=False)
     initial_verification_email_sent = BooleanProperty(default=False)

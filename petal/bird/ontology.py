@@ -1,11 +1,12 @@
 from django.core.cache import cache
 from django.utils.text import slugify
 
-from neomodel import (StructuredNode, StringProperty, db, DoesNotExist,
+from neomodel import (StructuredNode, StringProperty, FloatProperty, db, DoesNotExist,
                       RelationshipTo, RelationshipFrom, Relationship)
 from neo4j import CypherError
+from api.models import PetalObject
 
-class Article(StructuredNode):
+class Article(PetalObject):
     __abstract_node__ = True
     __label__ = "Article"
 
@@ -15,7 +16,8 @@ class Article(StructuredNode):
     links = StringProperty()
     title = StringProperty()
     content = StringProperty()
-    uuid = StringProperty()
+    longitude = FloatProperty()
+    latitude = FloatProperty()
     # node_id = StringProperty(index = True)
 
     # Relationships
@@ -45,7 +47,7 @@ class WikipediaArticle(Article):
     __label__ = "WikipediaArticle"
     pass
 
-class Species(StructuredNode):
+class Species(PetalObject):
     Order = StringProperty()
     CatalogSource = StringProperty()
     Phylum = StringProperty()
@@ -53,7 +55,6 @@ class Species(StructuredNode):
     Family = StringProperty()
     Class = StringProperty()
     Name = StringProperty(required = True)
-    uuid = StringProperty()
     # node_id = StringProperty(index = True)
 
     # Relationships (edges
