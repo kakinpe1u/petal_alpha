@@ -1,13 +1,11 @@
 import pytz
 from datetime import datetime
-import logging
 
 from django.conf import settings
 from django.core.cache import cache
 
 from celery import shared_task
-from petalusers.models import PetalUser
-from .models import Query, Keyword
+from .models import Query
 from elasticsearch import Elasticsearch
 from neomodel import DoesNotExist, db
 from neo4j import CypherError
@@ -15,9 +13,6 @@ from elasticsearch.exceptions import (ElasticsearchException, TransportError,
                                       ConflictError, RequestError)
 
 db.set_connection('bolt://neo4j:testing@139.88.179.199:7667')
-
-log = logging.getLogger(__name__)
-
 
 @shared_task()
 def update_query(query_param):

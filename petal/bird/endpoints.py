@@ -21,7 +21,7 @@ class SearchViewSet(ListAPIView):
         # TODO run query_param through natural language processor
 
         if filter_type is None or filter_type == 'general':
-            response = es.search(
+            result = es.search(
                 index='petal-search-base', size=50,
                 body={
                     "query": {
@@ -32,7 +32,7 @@ class SearchViewSet(ListAPIView):
                 })
         else:
             try:
-                response = es.search(
+                result = es.search(
                     index='petal-search-base', size=50,
                     doc_type=search_type_dict[filter_type],
                     body={
@@ -50,7 +50,7 @@ class SearchViewSet(ListAPIView):
                      "query_param": query_param,
                      }
         generate_job(job_func=update_query, job_param=job_param)
-        return response['hits']['hits']
+        return result['hits']['hits']
 
     def list(self, request, *args, **kwargs):
         try:

@@ -15,7 +15,6 @@ class Command(BaseCommand):
         es.indices.delete(index='_all', ignore=[400, 404])
         es.indices.create(index='tags')
         es.indices.create(index='petal-search-base')
-        es.indices.create(index='petal-search-user-specific-1')
         print ("Emptied all data")
 
     def handle(self, *args, **options):

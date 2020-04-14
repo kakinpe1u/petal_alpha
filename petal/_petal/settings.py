@@ -54,15 +54,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'rest_framework',
-    'rest_framework_api_key',
-    'rest_auth',
 
     # Third Party
     'django_neomodel',
     'neomodel',
-    'allauth',
-    'allauth.account',
-    'six',
 ]
 
 # django-allauth config
