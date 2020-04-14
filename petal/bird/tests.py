@@ -13,6 +13,19 @@ from bird.tasks import (update_query, update_query_object)
 from petalusers.serializers import PetalUserSerializer
 from registration.utils import create_user_util_test
 
+import pytz
+from datetime import datetime
+from django.core.cache import cache
+
+from neomodel import UniqueProperty
+from rest_framework.reverse import reverse
+from rest_framework import status
+from rest_framework.test import APITestCase
+from elasticsearch import Elasticsearch
+from elasticsearch.exceptions import TransportError
+
+
+
 # class TestUpdateSearchQuery(TestCase):
 #
 #     def setUp(self):
@@ -39,16 +52,3 @@ from registration.utils import create_user_util_test
 #         res = response.result
 #
 #         self.assertIsInstance(res, Exception)
-
-def test_create_keyword_task_success_keyword_exists(self):
-    from bird.models import Query, KeyWord
-
-    query = Query(search_query=str(uuid1()))
-    query.save()
-    keyword = KeyWord(keyword="test")
-    keyword.save()
-
-    data = {
-        "text": "test", "relevance": ".9",
-        "query_param": query.search_query
-    }

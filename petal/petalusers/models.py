@@ -10,7 +10,7 @@ from neomodel import (StructuredNode, StringProperty, IntegerProperty,
                       StructuredRel, BooleanProperty,
                       DoesNotExist, db)
 
-from api.models import PetalObject, RelationshipWeight
+from api.models import AbstractNode, RelationshipWeight
 from bird.models import Searchable, Impression
 
 

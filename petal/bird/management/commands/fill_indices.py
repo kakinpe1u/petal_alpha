@@ -9,7 +9,6 @@ log = logging.getLogger(__name__)
 
 class Command(BaseCommand):
     args = 'None.'
-    help = 'Creates placeholder representatives.'
 
     def populate_indices(self):
         es = Elasticsearch(settings.ELASTIC_SEARCH_HOST)

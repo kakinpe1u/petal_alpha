@@ -22,5 +22,5 @@ def birdresults(request):
     return render(request, 'bird_results.html', context)
 
 
-def search_result_view(request):
-    return render(request, 'search.html')
+# def search_result_view(request):
+#     return render(request, 'search.html')

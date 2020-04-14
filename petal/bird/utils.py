@@ -1,7 +1,10 @@
+import logging
 from django.conf import settings
 
 from elasticsearch import Elasticsearch
 from elasticsearch.exceptions import TransportError, NotFoundError
+
+log = logging.getLogger(__name__)
 
 def remove_query_object(object_uuid, object_type, index ="petal-search-base"):
     try:

@@ -48,7 +48,6 @@ class SearchViewSet(ListAPIView):
 
         job_param = {"username": self.request.user.username,
                      "query_param": query_param,
-                     # "keywords": keywords
                      }
         generate_job(job_func=update_query, job_param=job_param)
         return response['hits']['hits']

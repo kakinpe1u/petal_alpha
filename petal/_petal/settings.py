@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'neomodel',
     'allauth',
     'allauth.account',
+    'six',
 ]
 
 # django-allauth config
@@ -164,7 +165,7 @@ CELERY_DISABLE_RATE_LIMITS = True
 CELERY_ACCEPT_CONTENT = ['pickle', 'json']
 CELERY_ALWAYS_EAGER = False
 
-REMOVE_CLASSES = ["Searchable", "PetalObject"]
+REMOVE_CLASSES = ["Searchable", "AbstractNode"]
 
 SEARCH_TYPES = [
     ("general", "general"),

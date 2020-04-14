@@ -22,7 +22,7 @@ class RelationshipWeight(StructuredRel):
     status = StringProperty(default='seen')
     seen = BooleanProperty(default=True)
 
-class PetalObject(StructuredNode):
+class AbstractNode(StructuredNode):
     # object_uuid = UniqueIdProperty(default = uuid1, unique_index = True)
     object_uuid = UniqueIdProperty()
     created = DateTimeProperty(default = get_time)
