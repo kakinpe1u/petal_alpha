@@ -2,47 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3a561c5-ea91-4091-a726-fe981f68a40a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/alpha.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/alpha.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipfile" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/_petal/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/petal/_petal/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/petal/api/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/petal/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/api/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/petal/api/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/articles/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/articles/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/articles/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/articles/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/articles/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/articles/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/articles/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/bird/endpoints.py" beforeDir="false" afterPath="$PROJECT_DIR$/petal/bird/endpoints.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/bird/management/commands/fill_indices.py" beforeDir="false" afterPath="$PROJECT_DIR$/petal/bird/management/commands/fill_indices.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/bird/management/commands/remove_duplicate_petaluser_search.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/bird/management/commands/repopulate_elasticsearch.py" beforeDir="false" afterPath="$PROJECT_DIR$/petal/bird/management/commands/repopulate_elasticsearch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/bird/management/commands/update_pleb_search.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/bird/management/commands/empty_elasticsearch.py" beforeDir="false" afterPath="$PROJECT_DIR$/petal/bird/management/commands/empty_elasticsearch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/petal/bird/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/petal/bird/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/bird/ontology.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/bird/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/petal/bird/tasks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/petal/bird/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/petal/bird/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/bird/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/petal/bird/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/bird/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/petal/bird/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/petalusers/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/petal/petalusers/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/search/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/search/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/search/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/search/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/search/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/search/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/search/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/species/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/species/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/species/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/species/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/species/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/species/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/petal/species/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/petalusers/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/petalusers/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/petalusers/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/petalusers/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/petalusers/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/petalusers/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/petalusers/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/registration/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/registration/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/registration/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/registration/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/registration/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/registration/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/registration/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/registration/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/tags/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/tags/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/tags/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/tags/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/tags/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/tags/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petal/tags/views.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +111,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585791535984</updated>
-      <workItem from="1585791539684" duration="103304000" />
+      <workItem from="1585791539684" duration="103547000" />
     </task>
     <servers />
   </component>
@@ -139,6 +124,10 @@
     </state>
     <state x="-934" y="-325" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824/-1920.-325.1920.1040/1920.-325.1920.1040@-1920.-325.1920.1040" timestamp="1586321992989" />
     <state x="-934" y="-325" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824/1920.-325.1920.1040/-1920.-325.1920.1040@-1920.-325.1920.1040" timestamp="1586458690688" />
+    <state x="-1710" y="-54" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586858224892">
+      <screen x="-1920" y="-325" width="1920" height="1040" />
+    </state>
+    <state x="-1710" y="-54" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/-1920.-325.1920.1040/1920.-325.1920.1040@-1920.-325.1920.1040" timestamp="1586858224892" />
     <state x="365" y="212" key="FileChooserDialogImpl" timestamp="1586795066519">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -172,16 +161,27 @@
       <screen x="-1920" y="-325" width="1920" height="1040" />
     </state>
     <state x="-1747" y="-298" width="839" height="1039" key="dock-window-1/0.0.1536.824/-1920.-325.1920.1040/1920.-325.1920.1040@-1920.-325.1920.1040" timestamp="1586321020778" />
-    <state x="-783" y="-70" width="606" height="536" key="find.popup" timestamp="1586858183660">
+    <state x="-783" y="-70" width="606" height="536" key="find.popup" timestamp="1586858215967">
       <screen x="-1920" y="-325" width="1920" height="1040" />
     </state>
-    <state x="-783" y="-70" width="606" height="536" key="find.popup/0.0.1536.824/-1920.-325.1920.1040/1920.-325.1920.1040@-1920.-325.1920.1040" timestamp="1586858183660" />
+    <state x="-783" y="-70" width="606" height="536" key="find.popup/0.0.1536.824/-1920.-325.1920.1040/1920.-325.1920.1040@-1920.-325.1920.1040" timestamp="1586858215967" />
     <state x="910" y="202" width="609" height="536" key="find.popup/0.0.1536.824/-1920.-325.1920.1040/1920.-325.1920.1040@0.0.1536.824" timestamp="1586853386770" />
     <state x="-782" y="-70" width="606" height="536" key="find.popup/0.0.1536.824/1920.-325.1920.1040/-1920.-325.1920.1040@-1920.-325.1920.1040" timestamp="1586458956237" />
     <state x="-1777" y="-95" width="672" height="678" key="search.everywhere.popup" timestamp="1586402607524">
       <screen x="-1920" y="-325" width="1920" height="1040" />
     </state>
     <state x="-1777" y="-95" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.-325.1920.1040/1920.-325.1920.1040@-1920.-325.1920.1040" timestamp="1586402607524" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/petal/api/serializers.py</url>
+          <line>19</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/alpha$Unittests_for_tests_TestUpdateSearchQuery.coverage" NAME="Unittests for tests.TestUpdateSearchQuery Coverage Results" MODIFIED="1586447999996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/petal/bird" />

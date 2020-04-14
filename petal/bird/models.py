@@ -107,7 +107,7 @@ class Species(Searchable):
     Name = StringProperty(required=True)
     # node_id = StringProperty(index = True)
 
-    # Relationships (edges
+    # Relationships
     species_relationship = Relationship(".species.Species", None)
     article_relationship = RelationshipTo(".article.Article", "MENTIONS_SPECIES")
 

@@ -6,8 +6,6 @@ from elasticsearch import Elasticsearch
 
 class Command(BaseCommand):
     args = 'None.'
-    help = 'Empties info in every elasticsearch index. DO NOT USE ' \
-           'OUTSIDE OF DEV ENVIRONMENT.'
 
     def empty_elasticsearch(self):
         if not settings.DEBUG:
