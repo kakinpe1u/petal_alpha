@@ -10,8 +10,8 @@ from neomodel import (StructuredNode, StringProperty, IntegerProperty,
                       StructuredRel, BooleanProperty,
                       DoesNotExist, db)
 
-from api.models import AbstractNode, RelationshipWeight
-from bird.models import Searchable, Impression
+from api.models import AbstractNode
+from search.models import Searchable, Impression
 
 
 def get_current_time():
@@ -31,7 +31,6 @@ class OauthUser(AbstractNode):
     refresh_token = StringProperty()
     last_modified = DateTimeProperty(default=get_current_time)
     token_type = StringProperty(default="Bearer")
-
 
 class SearchCount(StructuredRel):
     times_searched = IntegerProperty(default=1)

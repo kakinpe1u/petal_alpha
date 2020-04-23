@@ -5,14 +5,13 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from api.utils import generate_job
-from content.utils import get_ordering, DatabaseQuerySet
 from search.tasks import update_query_object
 
 from .serializers import SpeciesSerializer, article_count
 from .models import Species
 
 
-class QuestionViewSet(viewsets.ModelViewSet):
+class SpeciesViewSet(viewsets.ModelViewSet):
     serializer_class = SpeciesSerializer
     lookup_field = "object_uuid"
     permission_classes = (IsAuthenticatedOrReadOnly,)
@@ -21,9 +20,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
         article = self.request.query_params.get('article', '')
         article_query = '(a:Article {object_uuid:"%s"})-' \
                         '[:MENTIONED_IN]->' % article
-
-        queryset = DatabaseQuerySet(Species, query=article_query, distinct=True)
-        return queryset
+        return article_query
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())

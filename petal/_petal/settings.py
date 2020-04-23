@@ -44,6 +44,10 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'bird.apps.BirdConfig',
     'api.apps.ApiConfig',
+    'search.apps.SearchConfig',
+    'content.apps.ContentConfig',
+    'species.apps.SpeciesConfig',
+    'articles.apps.ArticlesConfig',
 
     # Django
     'django.contrib.admin',
@@ -86,10 +90,7 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': environ.get("CACHE_LOCATION", "127.0.0.1:11211"),
-        'TIMEOUT': 172800,
-        'OPTIONS': {
-            'MAX_ENTRIES': 2500
-        }
+        "TIMEOUT": 60,
     }
 }
 

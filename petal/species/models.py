@@ -19,10 +19,10 @@ class Species(Searchable):
     Genus = StringProperty()
     Family = StringProperty()
     Class = StringProperty()
-    Name = StringProperty(required = True)
+    Name = StringProperty()
 
     # Relationships
-    articles_mentioned_in = RelationshipTo("article.models.Article", "MENTIONS_SPECIES")
+    articles_mentioned_in = RelationshipTo("articles.models.Article", "MENTIONS_SPECIES")
 
     @classmethod
     def get(cls, object_uuid):

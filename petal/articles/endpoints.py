@@ -8,7 +8,6 @@ from rest_framework.reverse import reverse
 from rest_framework.decorators import action
 from neomodel import db
 from api.utils import generate_job
-from content.utils import DatabaseQuerySet
 from content.views import ObjectCRUD
 from species.models import Species
 
@@ -20,9 +19,6 @@ class ArticleViewSet(viewsets.ModelViewSet):
     serializer_class = ArticleSerializer
     lookup_field = "object_uuid"
     permission_classes = (IsAuthenticatedOrReadOnly,)
-
-    def get_queryset(self):
-        return DatabaseQuerySet(Article)
 
     def get_object(self):
         return Article.nodes.get(object_uuid=self.kwargs[self.lookup_field])

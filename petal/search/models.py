@@ -1,4 +1,4 @@
-from api.models import AbstractNode, get_current_time
+from api.models import AbstractNode, get_time
 
 from neomodel import (StructuredNode, StringProperty, IntegerProperty,
                       FloatProperty, BooleanProperty, StructuredRel,
@@ -6,7 +6,7 @@ from neomodel import (StructuredNode, StringProperty, IntegerProperty,
 
 
 class Impression(StructuredRel):
-    viewed = DateTimeProperty(default=get_current_time)
+    viewed = DateTimeProperty(default=get_time)
     view_count = IntegerProperty(default=0)
 
 
@@ -40,7 +40,7 @@ class Query(StructuredNode):
     weight = IntegerProperty(default=0)
     search_query = StringProperty(unique_index=True)
     search_count = IntegerProperty(default=1)
-    last_searched = DateTimeProperty(default=get_current_time())
+    last_searched = DateTimeProperty(default=get_time())
     trending = BooleanProperty(default=False)
 
     # relationships
@@ -59,14 +59,3 @@ class Searchable(AbstractNode):
 
     def get_search_count(self):
         return self.search_count
-
-    # ensure the view count doesn't get too big
-    def increment_search_count(self):
-        try:
-            if self.search_count >= 9223372036854775807:
-                return 9223372036854775807
-            self.search_count += 1
-            self.save()
-            return self.search_count
-        except IndexError:
-            return 0

@@ -1,18 +1,15 @@
-
 import pytz
 import logging
 from datetime import datetime
 
 from django.core.cache import cache
 
-
-from neomodel import (StringProperty, IntegerProperty,
-                      Relationship, RelationshipTo, RelationshipFrom, StructuredRel,
-                      BooleanProperty, FloatProperty, DateTimeProperty,
+from neomodel import (StringProperty,  RelationshipTo,
+                      BooleanProperty,
                       DoesNotExist, db)
 
 from neo4j import CypherError
-from bird.models import Searchable
+from search.models import Searchable
 
 class PetalContent(Searchable):
     content = StringProperty()

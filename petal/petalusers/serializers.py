@@ -19,8 +19,7 @@ from django.conf import settings
 from django.utils.crypto import constant_time_compare, salted_hmac
 from datetime import date
 from .models import PetalUser
-from .import codecs
-
+import codecs
 from api.serializers import PetalSerializer
 from api.utils import generate_job, collect_request_data
 
@@ -277,12 +276,7 @@ class PetalUserSerializer(PetalSerializer):
         serializer.save()
         petaluser.initial_verification_email_sent = True
         petaluser.save()
-        generate_job(job_func=create_wall_task,
-                   job_param={"username": petaluser.username})
-        generate_job(job_func=generate_oauth_info,
-                   job_param={'username': petaluser.username,
-                               'password': data['password']},
-                   countdown=20)
+
         cache.delete(petaluser.username)
         cache.delete(petaluser.username)
         return petaluser

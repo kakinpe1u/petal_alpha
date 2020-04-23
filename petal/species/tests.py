@@ -13,6 +13,9 @@ class TestSpeciesModel(TestCase):
     def setUp(self):
         from django.core.cache import cache
         cache.clear()
-        self.species = Species(content='test content',
-                               object_uuid=str(uuid1()),
+        self.species = Species(object_uuid=str(uuid1()),
                                name=str(uuid1())).save()
+
+    def test_get_article_mentions(self):
+        self.species.get_article_mentions()
+
