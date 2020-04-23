@@ -54,10 +54,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'rest_framework',
+    'rest_framework_api_key',
+    'rest_auth',
+    'rest_framework.authtoken',
 
     # Third Party
     'django_neomodel',
     'neomodel',
+    'allauth',
+    'allauth.account',
 ]
 
 # django-allauth config
@@ -73,6 +78,32 @@ AUTHENTICATION_BACKENDS = (
 
 # have Django output any emails to the command line console instead.
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_VERIFICATION_TIMEOUT_DAYS = 1
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': environ.get("CACHE_LOCATION", "127.0.0.1:11211"),
+        'TIMEOUT': 172800,
+        'OPTIONS': {
+            'MAX_ENTRIES': 2500
+        }
+    }
+}
+
+VERIFY_SECURE = False
+
+REST_FRAMEWORK = {
+    'DEFAULT_MODEL_SERIALIZER_CLASS':
+        'rest_framework.serializers.HyperlinkedModelSerializer',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    )
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -156,12 +187,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CELERY_DISABLE_RATE_LIMITS = True
-CELERY_ACCEPT_CONTENT = ['pickle', 'json']
-CELERY_ALWAYS_EAGER = False
-
 REMOVE_CLASSES = ["Searchable", "AbstractNode"]
-
-SEARCH_TYPES = [
-    ("general", "general"),
-]

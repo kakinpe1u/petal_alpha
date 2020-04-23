@@ -25,6 +25,9 @@ spacy = "*"
 django-rest-auth = "*"
 six = "*"
 soup = "*"
+python-memcached = "*"
+django-oauth-toolkit = "*"
+sumy = "*"
 
 [requires]
 python_version = "3.7"

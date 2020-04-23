@@ -1,16 +1,16 @@
 from rest_framework import serializers
 
 from api.utils import generate_job
-from bird.tasks import update_query_object
+from search.tasks import update_query_object
 
-class NodeSerializer(serializers.Serializer):
+class PetalSerializer(serializers.Serializer):
     id = serializers.SerializerMethodField()
     type = serializers.SerializerMethodField()
     created = serializers.DateTimeField(read_only=True)
 
-    def get_id(self, object):
+    def get_id(self, obj):
         try:
-            return object.object_uuid
+            return obj.object_uuid
         except AttributeError:
             return None
 
@@ -24,4 +24,3 @@ class NodeSerializer(serializers.Serializer):
         }
         generate_job(job_func = update_query_object, job_param = task_param)
         return instance
-

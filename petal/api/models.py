@@ -1,10 +1,12 @@
 import pytz
 from datetime import datetime
+from uuid import uuid1
 from django.conf import settings
 
 from neomodel import (StructuredNode, UniqueIdProperty, IntegerProperty,
                       DateTimeProperty, StringProperty, BooleanProperty,
-                      StructuredRel, db)
+                      StructuredRel, RelationshipTo, db)
+from neo4j import CypherError
 
 def get_time():
     return datetime.now(pytz.utc)
@@ -33,4 +35,3 @@ class AbstractNode(StructuredNode):
 
     def get_child_label(self):
         return list(set(self.get_labels()) - set(settings.REMOVE_CLASSES))[0]
-
