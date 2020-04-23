@@ -54,10 +54,9 @@ class PetalUser(Searchable):
     email_verified = BooleanProperty(default=False)
     initial_verification_email_sent = BooleanProperty(default=False)
 
-    searches = RelationshipTo('bird.models.Query', 'SEARCHED',
+    searches = RelationshipTo('search.models.Query', 'SEARCHED',
                               model=SearchCount)
-    accessed_results = RelationshipTo('bird.models.Result',
-                                      'ACCESSED_RESULT')
+    accessed_results = RelationshipTo('search.models.Result', 'ACCESSED_RESULT')
 
     @classmethod
     def get(cls, username, cache_buster=False):

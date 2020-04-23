@@ -14,8 +14,6 @@ from neo4j import CypherError
 from elasticsearch.exceptions import (ElasticsearchException, TransportError,
                                       ConflictError, RequestError)
 
-db.set_connection('bolt://neo4j:testing@139.88.179.199:7667')
-
 log = logging.getLogger(__name__)
 
 @shared_task()
@@ -61,14 +59,14 @@ def update_query(username, query_param):
 @shared_task()
 def update_query_object(object_uuid, label=None, object_data=None, index="petal-search-base"):
     from petalusers.serializers import PetalUserSerializer
-    from api.models import get_parent_entity
+    from content.models import get_content
 
     if label is None:
-        label = get_parent_entity(
+        label = get_content(
             object_uuid).get_child_label().lower()
     log.critical("Updating Query Object")
     log.critical({"object_uuid": object_uuid})
-    query = 'MATCH (a:%s {object_uuid:"%s"}) RETURN a' % \
+    query = 'MATCH (query:%s {object_uuid:"%s"}) RETURN query' % \
             (label.title(), object_uuid)
     response, _ = db.cypher_query(query)
 
@@ -76,7 +74,7 @@ def update_query_object(object_uuid, label=None, object_data=None, index="petal-
         response.one.pull()
     else:
         raise update_query_object.retry(
-            exception=DoesNotExist('Object with uuid: %s ' 'does not exist' % object_uuid),
+            exception=DoesNotExist('Object with uuid: %s does not exist' % object_uuid),
             countdown=3, max_retries=None)
 
     if label == "petaluser":

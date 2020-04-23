@@ -35,11 +35,6 @@ class PetalContent(Searchable):
     def get_url(self, request):
         return None
 
-
-
-
-
-
 def get_content(object_uuid):
     try:
         query = 'MATCH (a:PetalContent {object_uuid:"%s"}) return a' \

@@ -1,4 +1,4 @@
-from api.models import AbstractNode, get_time
+from api.models import AbstractNode, get_current_time
 
 from neomodel import (StructuredNode, StringProperty, IntegerProperty,
                       FloatProperty, BooleanProperty, StructuredRel,
@@ -6,7 +6,7 @@ from neomodel import (StructuredNode, StringProperty, IntegerProperty,
 
 
 class Impression(StructuredRel):
-    viewed = DateTimeProperty(default=get_time)
+    viewed = DateTimeProperty(default=get_current_time)
     view_count = IntegerProperty(default=0)
 
 
@@ -23,7 +23,7 @@ class Keyword(StructuredNode):
     weight = IntegerProperty(default=0)
 
     # relationships
-    queries = RelationshipTo('bird.models.Query', 'SEARCH_QUERY')
+    queries = RelationshipTo('search.models.Query', 'SEARCH_QUERY')
 
 
 class Result(AbstractNode):
@@ -31,7 +31,7 @@ class Result(AbstractNode):
     object_type = StringProperty()
 
     # relationships
-    queries = RelationshipTo('bird.models.Query', 'QUERY')
+    queries = RelationshipTo('search.models.Query', 'QUERY')
     clicked_by = RelationshipTo('petalusers.models.PetalUser', 'ACCESSED_BY',
                                 model=ResultRel)
 
@@ -40,7 +40,7 @@ class Query(StructuredNode):
     weight = IntegerProperty(default=0)
     search_query = StringProperty(unique_index=True)
     search_count = IntegerProperty(default=1)
-    last_searched = DateTimeProperty(default=get_time)
+    last_searched = DateTimeProperty(default=get_current_time())
     trending = BooleanProperty(default=False)
 
     # relationships

@@ -12,8 +12,7 @@ from neomodel import db
 from api.utils import (collect_request_data, generate_job)
 from content.serializers import PetalContentSerializer, validate_reader
 from petalusers.models import PetalUser
-from bird.serializers import BirdSolutionSerializer
-from bird.models import BirdSolution
+from articles.serializers import ArticleSerializer
 from articles.models import Article
 
 from .models import Species
@@ -46,11 +45,9 @@ class SpeciesSerializer(PetalContentSerializer):
     def create(self, validated_data):
         request = self.context["request"]
         article = None
-        reader = PetalUser.get(request.user.username)
         article_id = validated_data.get('article', '')
         if article_id:
             article = Article.get(article_id)
-        validated_data['reader_username'] = reader.username
         uuid = str(uuid1())
         href = reverse('species-detail', kwargs={'object_uuid': uuid},
                        request=request)
@@ -87,30 +84,32 @@ class SpeciesSerializer(PetalContentSerializer):
                 '-[:MENTIONS_SPECIES]->(articles_mentioned_in:Article) ' \
                 'RETURN articles' % object.object_uuid
             result, _ = db.cypher_query(query)
-            articles = BirdSolutionSerializer(
-                [BirdSolution.inflate(row[0]) for row in result], many=True,
+            articles = ArticleSerializer(
+                [Article.inflate(row[0]) for row in result], many=True,
                 context={"request": request, "expand_param": expand_param}).data
         else:
             if relations == "hyperlink":
                 articles = [
-                    reverse('solution-detail',
-                            kwargs={'object_uuid': solution_uuid},
+                    reverse('article-detail',
+                            kwargs={'object_uuid': article_uuid},
                             request=request)
-                    for solution_uuid in object.get_solution_ids()
+                    for article_uuid in object.get_article_mentions()
                 ]
             else:
                 return articles
-
         return articles
 
-    def get_href(self, obj):
-        request, _, _, _, _ = gather_request_data(
+    def get_href(self, object):
+        request, _, _, _, _ = collect_request_data(
             self.context,
             expedite_param=self.context.get('expedite_param', None),
             expand_param=self.context.get('expand_param', None))
         return reverse(
-            'question-detail', kwargs={'object_uuid': obj.object_uuid},
+            'species-detail', kwargs={'object_uuid': object.object_uuid},
             request=request)
+
+    def get_views(self, object):
+        return object.get_view_count()
 
 
 

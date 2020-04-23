@@ -54,66 +54,51 @@ def get_filter_params(filter_by, sb_instance):
 
 
 class DatabaseQuerySet(object):
-    """
-    DatabaseQuerySet requires that you treat `result` as a keyword in your query. This
-    is used as the result value that will be used to run orders and filters
-    on and will eventually be returned.
-    DatabaseQuerySet does not support multiple responses currently.
-    DatabaseQuerySet expects "query" to be set to the root of the query you're
-    attempting to execute. So there shouldn't be a MATCH or RETURN in it and
-    it should use `result` to indicate the value that will be returned.
-    """
-    def __init__(self, model=None, query=None, using=None, hints=None,
-                 distinct=None, descending=None, query_order=None):
+    def __init__(self, model=None, query=None, distinct=None, query_order=None):
         self.model = model
         self.distinct = distinct
-        self.descending = descending
-        self._db = using
-        self._hints = hints or {}
-        self.query = query or "(result:%s)" % \
-                              self.model.__name__
+        self.query = query or "(result:%s)" % self.model.__name__
         self.query_order = query_order or ""
         self._result_cache = None
         self._sticky_filter = False
         self._for_write = False
         self._prefetch_related_lookups = []
         self._prefetch_done = False
-        self._known_related_objects = {}  # {rel_field, {pk: rel_obj}}
+        self._known_related_objects = {}
         self._fields = None
 
-    def __getitem__(self, k):
+    def __getitem__(self, index):
         """
         Retrieves an item or slice from the set of results.
         """
-        if not isinstance(k, (slice,) + six.integer_types):
+        if not isinstance(index, (slice,) + six.integer_types):
             raise TypeError
-        assert ((not isinstance(k, slice) and (k >= 0)) or
-                (isinstance(k, slice) and (k.start is None or k.start >= 0) and
-                 (k.stop is None or k.stop >= 0))), \
+        assert ((not isinstance(index, slice) and (index >= 0)) or
+                (isinstance(index, slice) and (index.start is None or index.start >= 0) and
+                 (index.stop is None or index.stop >= 0))), \
             "Negative indexing is not supported."
-        if isinstance(k, slice):
-            if k.start is not None:
-                start = int(k.start)
+        if isinstance(index, slice):
+            if index.start is not None:
+                start = int(index.start)
             else:
                 start = 0
-            if k.stop is not None:
-                stop = int(k.stop)
+            if index.stop is not None:
+                stop = int(index.stop)
             else:
                 stop = 0
             limit = stop - start
-            exe_query = "MATCH %s WITH %s result %s %s " \
+            exe_query = "MATCH %s WITH %s result %s " \
                         "RETURN result " \
                         "SKIP %d LIMIT %d" % (
-                            self.query, self.is_distinct(), self.query_order,
-                            self.reverse_order(), start, limit)
-            qs, _ = db.cypher_query(exe_query)
-            [row[0].pull() for row in qs]
-            qs = [self.model.inflate(neoinstance[0]) for neoinstance in qs]
-            return qs[::k.step] if k.step else qs
-        qs, _ = db.cypher_query("MATCH %s RETURN result SKIP %d LIMIT %d" % (
-            self.query, k, 1))
-        [row[0].pull() for row in qs]
-        return [self.model.inflate(neoinstance[0]) for neoinstance in qs][0]
+                            self.query, self.is_distinct(), self.query_order, start, limit)
+            queryset, _ = db.cypher_query(exe_query)
+            [row[0].pull() for row in queryset]
+            queryset = [self.model.inflate(instance[0]) for instance in queryset]
+            return queryset[::index.step] if index.step else queryset
+        queryset, _ = db.cypher_query("MATCH %s RETURN result SKIP %d LIMIT %d" % (
+            self.query, index, 1))
+        [row[0].pull() for row in queryset]
+        return [self.model.inflate(instance[0]) for instance in queryset][0]
 
     def count(self):
         result, _ = db.cypher_query("MATCH %s RETURN COUNT(%sres)" %
@@ -135,17 +120,9 @@ class DatabaseQuerySet(object):
         else:
             return ""
 
-    def reverse_order(self):
-        if self.descending:
-            return "DESC"
-        else:
-            return ""
-
     def _clone(self, query, query_order=None):
         clone = self.__class__(
-            model=self.model, query=query, using=self._db,
-            hints=self._hints, distinct=self.distinct,
-            descending=self.descending,
+            model=self.model, query=query, distinct=self.distinct,
             query_order=query_order or self.query_order)
         clone._for_write = self._for_write
         clone._prefetch_related_lookups = self._prefetch_related_lookups[:]
